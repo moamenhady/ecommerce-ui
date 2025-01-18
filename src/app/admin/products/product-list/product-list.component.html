@@ -1,0 +1,34 @@
+<div class="container my-4">
+    <h1 class="text-center mb-4">Product List</h1>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let product of products">
+            <div class="card h-100">
+                <img [src]="product.imagePath" class="card-img-top" alt="{{ product.name }}" />
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">
+                        <strong>Price:</strong> ${{ product.price }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="offset === 0">
+                <button class="page-link" (click)="previousPage()" [disabled]="offset === 0">Previous</button>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">Page {{ (offset / pageSize) + 1 }}</span>
+            </li>
+            <li class="page-item" [class.disabled]="(offset + pageSize) >= totalCount">
+                <button class="page-link" (click)="nextPage()"
+                    [disabled]="(offset + pageSize) >= totalCount">Next</button>
+            </li>
+        </ul>
+    </nav>
+
+    <p class="text-center mt-3">Total Products: {{ totalCount }}</p>
+</div>
